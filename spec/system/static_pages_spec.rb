@@ -36,4 +36,15 @@ describe "静的なページの表示機能", type: :system do
       expect(page).to have_title "About | #{base_title}"
     end
   end
+
+  context "contact" do
+    before do
+      visit "/static_pages/contact"
+    end
+
+    it "contactページを表示" do
+      expect(page).to have_content "Contact"
+      expect(page).to have_title "Contact | #{base_title}"
+    end
+  end
 end
