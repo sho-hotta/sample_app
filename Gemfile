@@ -26,7 +26,7 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   gem 'webdrivers'
-  gem 'spring-commands-rspec'
+  # gem 'spring-commands-rspec'
   gem 'faker'
   gem 'launchy'
   gem 'rspec-rails'
