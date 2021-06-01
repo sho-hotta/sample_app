@@ -11,7 +11,7 @@ describe "静的なページの表示機能", type: :system do
 
     it "homeページを表示" do
       expect(page).to have_content "Sample App"
-      expect(page).to have_title "Home | #{base_title}"
+      expect(page.title).to eq "#{base_title}"
     end
   end
 
@@ -22,7 +22,7 @@ describe "静的なページの表示機能", type: :system do
 
     it "helpページを表示" do
       expect(page).to have_content "Help"
-      expect(page).to have_title "Help | #{base_title}"
+      expect(page.title).to eq "Help | #{base_title}"
     end
   end
 
@@ -33,7 +33,7 @@ describe "静的なページの表示機能", type: :system do
 
     it "aboutページを表示" do
       expect(page).to have_content "About"
-      expect(page).to have_title "About | #{base_title}"
+      expect(page.title).to eq "About | #{base_title}"
     end
   end
 
@@ -44,7 +44,7 @@ describe "静的なページの表示機能", type: :system do
 
     it "contactページを表示" do
       expect(page).to have_content "Contact"
-      expect(page).to have_title "Contact | #{base_title}"
+      expect(page.title).to eq "Contact | #{base_title}"
     end
   end
 end
