@@ -12,6 +12,10 @@ describe "静的なページの表示機能", type: :system do
     it "homeページを表示" do
       expect(page).to have_content "Sample App"
       expect(page.title).to eq "#{base_title}"
+      expect(page).to have_link href: root_path, count: 2
+      expect(page).to have_link "Help", href: help_path
+      expect(page).to have_link "About", href: about_path
+      expect(page).to have_link "Contact", href: contact_path
     end
   end
 
