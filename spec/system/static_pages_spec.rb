@@ -51,4 +51,15 @@ describe "静的なページの表示機能", type: :system do
       expect(page.title).to eq "Contact | #{base_title}"
     end
   end
+
+  context "signup" do
+    before do
+      visit signup_path
+    end
+
+    it "signupページを表示" do
+      expect(page).to have_content "Sign up"
+      expect(page.title).to eq "Sign up | #{base_title}"
+    end
+  end
 end
