@@ -51,5 +51,11 @@ RSpec.describe User, type: :model do
       duplicate_user.valid?
       expect(duplicate_user.errors[:email]).to include("has already been taken")
     end
+
+    it "メールアドレスが小文字で保存される" do
+      user = User.new(name: "test", email: "TeSt@exAmple.Com")
+      user.save
+      expect(user.email).to eq "test@example.com"
+    end
   end
 end
