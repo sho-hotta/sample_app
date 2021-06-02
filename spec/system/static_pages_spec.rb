@@ -17,7 +17,7 @@ describe "静的なページの表示機能", type: :system do
 
   context "help" do
     before do
-      visit static_pages_help_path
+      visit help_path
     end
 
     it "helpページを表示" do
@@ -28,7 +28,7 @@ describe "静的なページの表示機能", type: :system do
 
   context "about" do
     before do
-      visit static_pages_about_path
+      visit about_path
     end
 
     it "aboutページを表示" do
@@ -39,7 +39,7 @@ describe "静的なページの表示機能", type: :system do
 
   context "contact" do
     before do
-      visit static_pages_contact_path
+      visit contact_path
     end
 
     it "contactページを表示" do
