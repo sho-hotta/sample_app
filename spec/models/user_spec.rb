@@ -45,7 +45,7 @@ RSpec.describe User, type: :model do
     end
 
     it "メールアドレスが重複していれば無効" do
-      user = User.new(name: "test", email: "test@example.com")
+      user = User.new(name: "test", email: "test@example.com", password: "foobar", password_confirmation: "foobar")
       duplicate_user = user.dup
       user.save
       duplicate_user.valid?
@@ -53,9 +53,21 @@ RSpec.describe User, type: :model do
     end
 
     it "メールアドレスが小文字で保存される" do
-      user = User.new(name: "test", email: "TeSt@exAmple.Com")
+      user = User.new(name: "test", email: "TeSt@exAmple.Com", password: "foobar", password_confirmation: "foobar")
       user.save
       expect(user.email).to eq "test@example.com"
+    end
+
+    it "パスワードが入力されていなければ無効" do
+      user = User.new(password: "", password_confirmation: "")
+      user.valid?
+      expect(user.errors[:password]).to include("can't be blank")
+    end
+
+    it "パスワードが5文字以下であれば無効" do
+      user = User.new(password: "a" * 5, password_confirmation: "a" * 5)
+      user.valid?
+      expect(user.errors[:password]).to include("is too short (minimum is 6 characters)")
     end
   end
 end
