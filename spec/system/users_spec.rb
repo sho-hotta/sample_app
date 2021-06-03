@@ -2,6 +2,23 @@ require "rails_helper"
 
 RSpec.describe "users", type: :system do
   describe "user create a new account" do
+    context "enter a valid values" do
+      before do
+        visit signup_path
+        fill_in "Name", with: "testuser"
+        fill_in "Email", with: "testuser@example.com"
+        fill_in "Password", with: "password"
+        fill_in "Confirmation", with: "password"
+        click_button "Create my account"
+      end
+
+      it "redirect to /users/params[:id]" do
+        flash_message = find(".alert-success").text
+        expect(flash_message).not_to be_empty
+        expect(current_path).to eq user_path(User.last)
+      end
+    end
+
     context "enter an invalid values" do
       before do
         visit signup_path
