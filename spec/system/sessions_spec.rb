@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "sessions", type: :system do
-  describe "login" do
+  describe "login/logout" do
     before do
       @user = FactoryBot.create(:user)
     end
@@ -20,6 +20,16 @@ RSpec.describe "sessions", type: :system do
         click_link "Account"
         expect(page).to have_link "Profile", href: user_path(@user)
         expect(page).to have_link "Log out", href: logout_path
+      end
+
+      it "logout and redirect to /" do
+        expect(current_path).to eq user_path(@user)
+        click_link "Account"
+        click_link "Log out"
+        expect(current_path).to eq root_path
+        expect(page).to have_link "Log in", href: login_path
+        expect(page).not_to have_link "Profile", href: user_path(@user)
+        expect(page).not_to have_link "Log out", href: logout_path
       end
     end
 
