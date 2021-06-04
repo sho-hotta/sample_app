@@ -16,6 +16,10 @@ RSpec.describe "users", type: :system do
         flash_message = find(".alert-success").text
         expect(flash_message).not_to be_empty
         expect(current_path).to eq user_path(User.last)
+        expect(page).not_to have_link "Log in", href: login_path
+        click_link "Account"
+        expect(page).to have_link "Profile", href: user_path(User.last)
+        expect(page).to have_link "Log out", href: logout_path
       end
     end
 
