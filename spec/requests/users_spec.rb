@@ -32,6 +32,9 @@ RSpec.describe "Users", type: :request do
         expect do
           post users_path, params: { user: FactoryBot.attributes_for(:user) }
         end.to change{ User.count }.by(1)
+        expect(ActionMailer::Base.deliveries.size).to eq(1)
+        expect(response).to redirect_to root_url
+        expect(is_logged_in?).to be_falsy
       end
     end
 
