@@ -73,4 +73,31 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    before do
+      @user = FactoryBot.create(:user)
+      @admin_user = FactoryBot.create(:user, name: "admin", email: "admin2@example.com", admin: true)
+    end
+
+    context "user is admin" do
+      it "succeds" do
+        log_in_as(@admin_user)
+        expect do
+          delete user_path(@user)
+        end.to change{ User.count }.by(-1)
+        expect(response).to redirect_to users_url
+      end
+    end
+
+    context "user isn't admin" do
+      it "doesn't succed" do
+        log_in_as(@user)
+        expect do
+          delete user_path(@admin_user)
+        end.to change{ User.count }.by(0)
+        expect(response).to redirect_to root_url
+      end
+    end
+  end
 end
