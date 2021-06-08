@@ -4,7 +4,7 @@ RSpec.describe Micropost, type: :model do
   context "バリデーション" do
     before do
       @user = FactoryBot.create(:user)
-      @micropost = Micropost.new(content: "TestText", user_id: @user.id)
+      @micropost = @user.microposts.build(content: "TestText")
     end
 
     it "user_idが存在しなければ無効" do
