@@ -31,4 +31,13 @@ RSpec.describe Micropost, type: :model do
       expect(@micropost).to be_valid
     end
   end
+
+  context "ソート" do
+    it "新着順に表示される" do
+      @user.microposts.create(content: "day_before_yesterday", created_at: 2.days.ago)
+      now = @user.microposts.create(content: "now", created_at: Time.zone.now)
+      @user.microposts.create(content: "yesterday", created_at: 1.days.ago)
+      expect(Micropost.first).to eq now
+    end
+  end
 end
