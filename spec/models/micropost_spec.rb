@@ -1,39 +1,34 @@
 require 'rails_helper'
 
 RSpec.describe Micropost, type: :model do
-  context "バリデーション" do
-    before do
-      @user = FactoryBot.create(:user)
-      @micropost = @user.microposts.build(content: "TestText")
-    end
+  before do
+    @micropost = FactoryBot.create(:micropost)
+    @user = @micropost.user
+  end
 
+  context "バリデーション" do
     it "user_idが存在しなければ無効" do
       @micropost.user_id = nil
-      @micropost.valid?
-      expect(@micropost.errors[:user_id]).to include("can't be blank")
+      expect(@micropost).to be_invalid
     end
 
     it "user_idが存在すれば有効" do
-      @micropost.valid?
-      expect(@micropost.errors[:user_id]).to eq []
+      expect(@micropost).to be_valid
     end
 
     it "contentが存在しなければ無効" do
       @micropost.content = " "
-      @micropost.valid?
-      expect(@micropost.errors[:content]).to include("can't be blank")
+      expect(@micropost).to be_invalid
     end
 
     it "contentが141文字以上であれば無効" do
       @micropost.content = "a" * 141
-      @micropost.valid?
-      expect(@micropost.errors[:content]).to include("is too long (maximum is 140 characters)")
+      expect(@micropost).to be_invalid
     end
 
     it "contentが140文字であれば有効" do
       @micropost.content = "a" * 140
-      @micropost.valid?
-      expect(@micropost.errors[:content]).to eq []
+      expect(@micropost).to be_valid
     end
   end
 end

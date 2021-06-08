@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :micropost do
     content { "TestText" }
-    user { nil }
+    created_at { 10.minutes.ago }
+    user
   end
 end
