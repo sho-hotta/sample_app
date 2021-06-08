@@ -32,12 +32,20 @@ RSpec.describe Micropost, type: :model do
     end
   end
 
-  context "ソート" do
+  context "default_scope" do
     it "新着順に表示される" do
       @user.microposts.create(content: "day_before_yesterday", created_at: 2.days.ago)
       now = @user.microposts.create(content: "now", created_at: Time.zone.now)
       @user.microposts.create(content: "yesterday", created_at: 1.days.ago)
       expect(Micropost.first).to eq now
+    end
+  end
+
+  context "dependent: :destroy" do
+    it "機能する" do
+      expect do
+        @user.destroy
+      end.to change{ Micropost.count }.by(-1)
     end
   end
 end
