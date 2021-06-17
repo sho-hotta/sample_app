@@ -15,6 +15,7 @@ gem 'bcrypt', '3.1.13'
 gem 'faker'
 gem 'will_paginate', '3.3.0'
 gem 'bootstrap-will_paginate', '1.0.0'
+gem 'active_storage_validations', '0.9.4'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
