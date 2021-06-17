@@ -25,10 +25,12 @@ RSpec.describe "microposts", type: :system do
 
     it "有効な投稿が保存される" do
       fill_in "micropost_content", with: "valid_content"
+      attach_file "micropost_image", "#{Rails.root}/spec/fixtures/Untitled.png"
       expect do
         click_on "Post"
         expect(current_path).to eq root_path
         expect(page).to have_css ".alert-success"
+        expect(page).to have_selector "img[src$='Untitled.png']"
       end.to change{ Micropost.count }.by(1)
     end
 
