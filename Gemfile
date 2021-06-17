@@ -18,6 +18,7 @@ gem 'bootstrap-will_paginate', '1.0.0'
 gem 'active_storage_validations', '0.9.4'
 gem 'mini_magick', '4.11.0'
 gem 'image_processing', '1.12.1'
+gem 'aws-sdk-s3', '~> 1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
